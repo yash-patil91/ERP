@@ -1,0 +1,14 @@
+.sidebar .MuiPaper-root{
+  background: #464667 !important;
+  color: white !important;
+  border-radius: 0 2rem 2rem 0;
+}
+
+.drawer_box ul li .MuiButtonBase-root .MuiListItemIcon-root{
+  color: white !important;
+}
+
+.sidebar{
+  background-color: #2e2e48;
+}
+

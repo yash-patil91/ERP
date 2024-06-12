@@ -2,10 +2,13 @@ const User = require('../models/user');
 const jwt = require('jsonwebtoken');
 
 exports.register = async (req, res) => {
-    const { name, username, password } = req.body;
+    const { name, username, password, email } = req.body;
     try {
         if (!name) {
             return res.status(400).json({ message: 'Name is required' });
+        }
+        if (!email) {
+            return res.status(400).json({ message: 'Email is required' });
         }
         if (!username) {
             return res.status(400).json({ message: 'Username is required' });
@@ -13,11 +16,11 @@ exports.register = async (req, res) => {
         if (!password) {
             return res.status(400).json({ message: 'Password is required' });
         }
-        let user = await User.findOne({ username });
+        let user = await User.findOne({ $or: [{ username }, { email }] });
         if (user) {
             return res.status(400).json({ message: 'User already exists' });
         }
-        user = new User({ name, username, password });
+        user = new User({ name, username, password, email });
         await user.save();
         const payload = { user: { id: user.id } };
         const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: '1h' });
@@ -31,12 +34,12 @@ exports.login = async (req, res) => {
     const { username, password } = req.body;
     try {
         if (!username) {
-            return res.status(400).json({ message: 'Username is required' });
+            return res.status(400).json({ message: 'Username or email is required' });
         }
         if (!password) {
             return res.status(400).json({ message: 'Password is required' });
         }
-        const user = await User.findOne({ username });
+        const user = await User.findOne({ $or: [{ username }, { email: username }] });
         if (!user) {
             return res.status(400).json({ message: 'Invalid credentials' });
         }
