@@ -19,6 +19,7 @@ import {
     Divider 
 } from '@mui/material';
 
+
 const Login = () => {
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [darkMode, setDarkMode] = useState(false);
@@ -81,14 +82,22 @@ const Login = () => {
 
                 <form onSubmit={handleSubmit}>
                     <Box display="flex" flexDirection="column" gap={2} mt={2}>
-                        <TextField
+                    <TextField
                             label="Email or Username"
                             variant="outlined"
                             name="username"
                             value={formData.username}
                             onChange={handleChange}
                             fullWidth
-                            InputProps={{ style: { color: darkMode ? 'white' : 'inherit' }, classes: { notchedOutline: darkMode ? 'MuiOutlinedInput-notchedOutline' : '' } }}
+                            InputProps={{
+                                style: { color: darkMode ? 'white' : 'inherit' },
+                                classes: { notchedOutline: darkMode ? 'MuiOutlinedInput-notchedOutline' : '' },
+                            }}
+                            InputLabelProps={{
+                                sx: {
+                                    color: darkMode ? 'white' : 'grey.600'
+                                }
+                            }}
                             sx={{ bgcolor: darkMode ? 'grey.700' : 'inherit' }}
                         />
                         <TextField
@@ -105,10 +114,15 @@ const Login = () => {
                                 endAdornment: (
                                     <InputAdornment position="end">
                                         <IconButton onClick={togglePasswordVisibility}>
-                                            {passwordVisible ? <IoEyeOff /> : <IoEye />}
+                                            {passwordVisible ? <IoEyeOff style={{color: darkMode ? 'white' : 'inherit'}}/> : <IoEye style={{color: darkMode ? 'white' : 'inherit'}}/>}
                                         </IconButton>
                                     </InputAdornment>
                                 )
+                            }}
+                            InputLabelProps={{
+                                sx: {
+                                    color: darkMode ? 'white' : 'grey.600'
+                                }
                             }}
                             sx={{ bgcolor: darkMode ? 'grey.700' : 'inherit' }}
                         />

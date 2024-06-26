@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import { RiGoogleFill } from "react-icons/ri";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { GiWarBonnet } from "react-icons/gi";
-import { FaApple } from "react-icons/fa";
 import { MdDarkMode, MdOutlineLightMode } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -16,7 +14,6 @@ import {
     Button,
     InputAdornment,
     Box,
-    Divider
 } from '@mui/material';
 
 const Registration = () => {
@@ -117,6 +114,11 @@ const Registration = () => {
                             onChange={handleInputChange}
                             fullWidth
                             InputProps={{ style: { color: darkMode ? 'white' : 'inherit' } }}
+                            InputLabelProps={{
+                                sx: {
+                                    color: darkMode ? 'white' : 'grey.600'
+                                }
+                            }}
                             sx={{ bgcolor: darkMode ? 'grey.700' : 'inherit' }}
                         />
                         <TextField
@@ -127,6 +129,11 @@ const Registration = () => {
                             onChange={handleInputChange}
                             fullWidth
                             InputProps={{ style: { color: darkMode ? 'white' : 'inherit' } }}
+                            InputLabelProps={{
+                                sx: {
+                                    color: darkMode ? 'white' : 'grey.600'
+                                }
+                            }}
                             sx={{ bgcolor: darkMode ? 'grey.700' : 'inherit' }}
                         />
                         <TextField
@@ -137,6 +144,11 @@ const Registration = () => {
                             onChange={handleInputChange}
                             fullWidth
                             InputProps={{ style: { color: darkMode ? 'white' : 'inherit' } }}
+                            InputLabelProps={{
+                                sx: {
+                                    color: darkMode ? 'white' : 'grey.600'
+                                }
+                            }}
                             sx={{ bgcolor: darkMode ? 'grey.700' : 'inherit' }}
                         />
                         {usernameError && <Typography color="error">{usernameError}</Typography>}
@@ -153,10 +165,15 @@ const Registration = () => {
                                 endAdornment: (
                                     <InputAdornment position="end">
                                         <IconButton onClick={togglePasswordVisibility}>
-                                            {passwordVisible ? <IoEyeOff /> : <IoEye />}
+                                            {passwordVisible ? <IoEyeOff style={{color: darkMode ? 'white' : 'inherit'}}/> : <IoEye style={{color: darkMode ? 'white' : 'inherit'}}/>}
                                         </IconButton>
                                     </InputAdornment>
                                 )
+                            }}
+                            InputLabelProps={{
+                                sx: {
+                                    color: darkMode ? 'white' : 'grey.600'
+                                }
                             }}
                             sx={{ bgcolor: darkMode ? 'grey.700' : 'inherit' }}
                         />
